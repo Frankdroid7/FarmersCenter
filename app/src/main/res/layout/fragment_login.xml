@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_llt_root"
+    android:gravity="center"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:context=".LoginFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/PPR_FULL_WHITE"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:background="@drawable/form_background">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textEmailAddress"
+            android:background="@null"
+            android:hint="@string/email"
+            android:textColor="@color/PPR_FULL_WHITE"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/PPR_FULL_WHITE"
+        android:layout_margin="20dp"
+        android:paddingLeft="10dp"
+        android:background="@drawable/form_background"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_pswd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            android:background="@null"
+            android:textColor="@color/PPR_FULL_WHITE" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/form_btn_background"
+        android:elevation="10dp"
+        android:text="@string/login"
+        android:textColor="@color/PPR_FULL_WHITE"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp" />
+
+    <ProgressBar
+        android:id="@+id/login_pb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+</LinearLayout>

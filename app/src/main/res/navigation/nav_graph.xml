@@ -10,5 +10,23 @@
         android:id="@+id/splashScreenFragment2"
         android:name="com.frankdroid7.farmerscenter.SplashScreenFragment"
         android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" />
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment2_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.frankdroid7.farmerscenter.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeScreenFragment"
+        android:name="com.frankdroid7.farmerscenter.HomeScreenFragment"
+        android:label="fragment_home_screen"
+        tools:layout="@layout/fragment_home_screen" />
 </navigation>
