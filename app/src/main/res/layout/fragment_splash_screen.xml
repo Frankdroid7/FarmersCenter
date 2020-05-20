@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".SplashScreenFragment">
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:scaleType="centerCrop"
+    android:contentDescription="@string/farmers_image"
+    android:src="@drawable/farmers_splash_screen_img"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="@string/welcome_message"
+        android:textColor="@color/PPR_FULL_WHITE"
+        android:textStyle="bold"
+        android:textSize="25sp"/>
+
+</LinearLayout>

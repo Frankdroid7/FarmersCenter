@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/PPR_GREEN700</color>
+    <color name="colorPrimaryDark">@color/PPR_GREEN900</color>
+    <color name="colorAccent">#03DAC5</color>
+</resources>
