@@ -1,4 +1,4 @@
-package com.frankdroid7.farmerscenter
+package com.frankdroid7.farmerscenter.fragments
 
 import android.os.Bundle
 import android.os.Handler
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import com.frankdroid7.farmerscenter.R
 
 class SplashScreenFragment : Fragment() {
 

@@ -10,4 +10,6 @@
     <string name="login">LOGIN</string>
     <string name="about_us">About Us</string>
     <string name="contact_us">Contact Us</string>
+    <string name="farm_info">Farm Info</string>
+    <string name="farmer_s_info">Farmer\'s Info</string>
 </resources>

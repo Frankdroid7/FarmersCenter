@@ -1,10 +1,10 @@
-package com.frankdroid7.farmerscenter
+package com.frankdroid7.farmerscenter.fragments
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.frankdroid7.farmerscenter.R
 import kotlinx.android.synthetic.main.fragment_home_screen.view.*
 
 

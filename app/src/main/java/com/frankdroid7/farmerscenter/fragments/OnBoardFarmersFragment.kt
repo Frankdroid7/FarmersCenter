@@ -1,4 +1,4 @@
-package com.frankdroid7.farmerscenter
+package com.frankdroid7.farmerscenter.fragments
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.frankdroid7.farmerscenter.R
 import kotlinx.android.synthetic.main.fragment_on_board_farmers.view.*
 
 class OnBoardFarmersFragment : Fragment() {
@@ -33,13 +34,13 @@ class OnBoardFarmersFragment : Fragment() {
             imageView = farmers_photo_img
             farmers_photo_img.setOnClickListener {
 
-                takeFarmersPhotograph()
+                captureFarmersPhotograph()
 
             }
         }
     }
 
-    private fun takeFarmersPhotograph() {
+    private fun captureFarmersPhotograph() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(activity?.packageManager!!)?.also {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
