@@ -8,9 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 
-/**
- * A simple [Fragment] subclass.
- */
 class SplashScreenFragment : Fragment() {
 
     override fun onCreateView(
@@ -23,6 +20,7 @@ class SplashScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
 
         Handler().postDelayed({

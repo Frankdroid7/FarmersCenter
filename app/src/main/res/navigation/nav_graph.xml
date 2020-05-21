@@ -29,4 +29,9 @@
         android:name="com.frankdroid7.farmerscenter.HomeScreenFragment"
         android:label="fragment_home_screen"
         tools:layout="@layout/fragment_home_screen" />
+    <fragment
+        android:id="@+id/onBoardFarmersFragment"
+        android:name="com.frankdroid7.farmerscenter.OnBoardFarmersFragment"
+        android:label="fragment_on_board_farmers"
+        tools:layout="@layout/fragment_on_board_farmers" />
 </navigation>
