@@ -47,6 +47,12 @@
 
         </androidx.cardview.widget.CardView>
 
+        <ImageView
+            android:id="@+id/re_farmers_photo_img"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"/>
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

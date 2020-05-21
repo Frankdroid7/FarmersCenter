@@ -23,9 +23,8 @@ class SplashScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         Handler().postDelayed({
-            view.findNavController().navigate(R.id.loginFragment)
+            view.findNavController().navigate(R.id.onBoardFarmersFragment)
         }, 4000)
     }
 
