@@ -16,4 +16,6 @@
     <string name="farmers_onboard_image">Farmers Onboard Image</string>
     <string name="farmers_name">Farmers Name</string>
     <string name="farm_name">Farm Name</string>
+    <string name="delete_all_records">Delete All Records</string>
+    <string name="delete_record">Delete Record</string>
 </resources>

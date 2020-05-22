@@ -25,4 +25,10 @@ class FarmersViewModel(application: Application) : AndroidViewModel(application)
     fun insert(farmersData: FarmersData) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(farmersData)
     }
+
+    fun deleteFarmersDataById(id: Int){
+        viewModelScope.launch (Dispatchers.IO){
+            repository.deleteFarmersDataById(id)
+        }
+    }
 }

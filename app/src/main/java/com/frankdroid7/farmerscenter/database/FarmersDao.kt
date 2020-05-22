@@ -18,6 +18,9 @@ interface FarmersDao {
     @Query("SELECT * from farmers_table WHERE id = :id")
     fun getFarmersDataById(id: Int): FarmersData
 
+    @Query("DELETE from farmers_table WHERE id = :id")
+    fun deleteFarmersDataById(id: Int)
+
     @Query("DELETE FROM farmers_table")
     suspend fun deleteAll()
 }

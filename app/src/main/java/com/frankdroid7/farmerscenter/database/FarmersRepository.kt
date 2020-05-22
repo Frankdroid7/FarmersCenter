@@ -12,4 +12,8 @@ class FarmersRepository(private val farmersDao: FarmersDao) {
     suspend fun getFarmersDataById(id: Int): FarmersData{
         return farmersDao.getFarmersDataById(id)
     }
+
+    suspend fun deleteFarmersDataById(id: Int){
+        farmersDao.deleteFarmersDataById(id)
+    }
 }

@@ -22,15 +22,29 @@
         android:contentDescription="@string/farmers_image"
         tools:src="@drawable/ic_add"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/item_farm_name_textV"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:padding="10dp"
         android:text="@string/farm_name"
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"/>
+
+        <ImageButton
+            android:id="@+id/item_popup_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_popup_menu"/>
+    </RelativeLayout>
 
 </LinearLayout>
 

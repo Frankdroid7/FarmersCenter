@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/delete_all_records_menu"
+        android:title="@string/delete_all_records"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/about_us_menu"
         android:title="@string/about_us"
         app:showAsAction="never"/>

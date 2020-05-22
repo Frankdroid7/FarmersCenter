@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -86,6 +87,18 @@ class HomeScreenFragment : Fragment() {
                 }
                 findNavController().navigate(R.id.detailsScreenFragment, bundle)
 
+            }
+            farmersAdapter.popUpListener = {id, view ->
+
+                val popup = PopupMenu(context, view)
+                popup.inflate(R.menu.popup_menu)
+                popup.setOnMenuItemClickListener { menuItem ->
+                    when(menuItem.itemId){
+                        R.id.delete_record_menu -> farmersViewModel.deleteFarmersDataById(id)
+                    }
+                    return@setOnMenuItemClickListener true
+                }
+                popup.show()
             }
             main_recyclerView.adapter = farmersAdapter
             main_recyclerView.layoutManager = GridLayoutManager(context, 2)

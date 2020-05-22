@@ -7,6 +7,7 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -20,6 +21,7 @@ class FarmersAdapter internal constructor(
 ) : RecyclerView.Adapter<FarmersAdapter.FarmersViewHolder>() {
 
     var onClickListener = {farmersData: FarmersData ->}
+    var popUpListener = {id: Int, view: View -> }
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var farmersData = emptyList<FarmersData>() // Cached copy of words
 
@@ -28,6 +30,7 @@ class FarmersAdapter internal constructor(
         val farmersImg = itemView.findViewById<ImageView>(R.id.item_farmers_img)!!
         val farmName = itemView.findViewById<TextView>(R.id.item_farm_name_textV)!!
         val farmCardRtV = itemView.findViewById<CardView>(R.id.item_card_rtV)!!
+        val popUpBtn = itemView.findViewById<ImageButton>(R.id.item_popup_btn)!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FarmersViewHolder {
@@ -38,6 +41,7 @@ class FarmersAdapter internal constructor(
     override fun onBindViewHolder(holder: FarmersViewHolder, position: Int) {
         val currentFarmersData = farmersData[position]
         holder.apply {
+            popUpBtn.setOnClickListener { popUpListener(currentFarmersData.id, popUpBtn) }
             farmCardRtV.setOnClickListener { onClickListener(currentFarmersData) }
             farmName.text = currentFarmersData.farm_name
             farmersImg.setImageBitmap(currentFarmersData.farmers_image.convertToBitMap())
