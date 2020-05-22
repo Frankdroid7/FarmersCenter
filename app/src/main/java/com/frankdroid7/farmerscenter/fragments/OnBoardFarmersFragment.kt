@@ -78,13 +78,4 @@ class OnBoardFarmersFragment : Fragment() {
 
     }
 
-    private fun String.convertToBitMap(): Bitmap? {
-        return try {
-            val encodeByte = Base64.decode(this, Base64.DEFAULT)
-            BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)
-        } catch (e: Exception) {
-            null
-        }
-
-    }
 }
