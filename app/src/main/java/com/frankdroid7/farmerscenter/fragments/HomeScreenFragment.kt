@@ -54,6 +54,13 @@ class HomeScreenFragment : Fragment() {
 
          farmersAdapter = FarmersAdapter(requireContext())
 
+        farmersViewModel.allFarmersData.observe(viewLifecycleOwner, Observer{farmersData ->
+
+            farmersData?.let {
+                farmersAdapter.setFarmersData(it)
+            }
+        })
+
         view.home_screen_toolbar.inflateMenu(R.menu.home_menu)
         return view
     }
