@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -16,6 +16,11 @@ import com.frankdroid7.farmerscenter.FarmersViewModel
 import com.frankdroid7.farmerscenter.R
 import com.frankdroid7.farmerscenter.adapter.FarmersAdapter
 import com.frankdroid7.farmerscenter.database.FarmersData
+import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARMERS_AGE
+import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARMERS_IMG
+import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARMERS_NAME
+import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARM_LOCATION
+import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARM_NAME
 import kotlinx.android.synthetic.main.fragment_home_screen.view.*
 
 
@@ -42,18 +47,17 @@ class HomeScreenFragment : Fragment() {
         arguments?.let {
             val farmersData = FarmersData(
                 0,
-                arguments?.getString(OnBoardFarmersFragment.FARMERS_NAME)!!,
-                arguments?.getString(OnBoardFarmersFragment.FARMERS_AGE)!!,
-                arguments?.getString(OnBoardFarmersFragment.FARMERS_IMG)!!,
-                arguments?.getString(OnBoardFarmersFragment.FARM_NAME)!!,
-                arguments?.getString(OnBoardFarmersFragment.FARM_LOCATION)!!
+                arguments?.getString(FARMERS_NAME)!!,
+                arguments?.getString(FARMERS_AGE)!!,
+                arguments?.getString(FARMERS_IMG)!!,
+                arguments?.getString(FARM_NAME)!!,
+                arguments?.getString(FARM_LOCATION)!!
 
             )
             farmersViewModel.insert(farmersData)
         }
 
          farmersAdapter = FarmersAdapter(requireContext())
-
         farmersViewModel.allFarmersData.observe(viewLifecycleOwner, Observer{farmersData ->
 
             farmersData?.let {
@@ -69,8 +73,20 @@ class HomeScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         view.apply {
+            farmersAdapter.onClickListener = {farmersData ->
+
+                val bundle = bundleOf()
+                bundle.apply {
+                    putString(FARMERS_NAME, farmersData.farmers_name)
+                    putString(FARMERS_AGE, farmersData.farmers_age)
+                    putString(FARMERS_IMG, farmersData.farmers_image)
+                    putString(FARM_NAME, farmersData.farm_name)
+                    putString(FARM_LOCATION, farmersData.farm_location)
+                }
+                findNavController().navigate(R.id.detailsScreenFragment, bundle)
+
+            }
             main_recyclerView.adapter = farmersAdapter
             main_recyclerView.layoutManager = GridLayoutManager(context, 2)
             home_fab.setOnClickListener {

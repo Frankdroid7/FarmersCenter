@@ -9,4 +9,7 @@ class FarmersRepository(private val farmersDao: FarmersDao) {
     suspend fun insert(farmersData: FarmersData) {
         farmersDao.insert(farmersData)
     }
+    suspend fun getFarmersDataById(id: Int): FarmersData{
+        return farmersDao.getFarmersDataById(id)
+    }
 }

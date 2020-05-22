@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.frankdroid7.farmerscenter.R
 import com.frankdroid7.farmerscenter.database.FarmersData
@@ -18,13 +19,15 @@ class FarmersAdapter internal constructor(
     context: Context
 ) : RecyclerView.Adapter<FarmersAdapter.FarmersViewHolder>() {
 
+    var onClickListener = {farmersData: FarmersData ->}
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var farmersData = emptyList<FarmersData>() // Cached copy of words
 
     inner class FarmersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val farmersImg = itemView.findViewById<ImageView>(R.id.item_farmers_img)
-        val farmName = itemView.findViewById<TextView>(R.id.item_farm_name_textV)
+        val farmersImg = itemView.findViewById<ImageView>(R.id.item_farmers_img)!!
+        val farmName = itemView.findViewById<TextView>(R.id.item_farm_name_textV)!!
+        val farmCardRtV = itemView.findViewById<CardView>(R.id.item_card_rtV)!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FarmersViewHolder {
@@ -35,8 +38,9 @@ class FarmersAdapter internal constructor(
     override fun onBindViewHolder(holder: FarmersViewHolder, position: Int) {
         val currentFarmersData = farmersData[position]
         holder.apply {
+            farmCardRtV.setOnClickListener { onClickListener(currentFarmersData) }
             farmName.text = currentFarmersData.farm_name
-            farmersImg.setImageBitmap(currentFarmersData.farmers_photo.convertToBitMap())
+            farmersImg.setImageBitmap(currentFarmersData.farmers_image.convertToBitMap())
         }
     }
 
@@ -48,7 +52,8 @@ class FarmersAdapter internal constructor(
     override fun getItemCount() = farmersData.size
 }
 
-private fun String.convertToBitMap(): Bitmap? {
+
+fun String.convertToBitMap(): Bitmap? {
     return try {
         val encodeByte = Base64.decode(this, Base64.DEFAULT)
         BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)

@@ -15,8 +15,8 @@ interface FarmersDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(farmersData: FarmersData)
 
-    @Query("SELECT * from farmers_table WHERE id= :id")
-    fun getFarmersDataById(id: String): FarmersData
+    @Query("SELECT * from farmers_table WHERE id = :id")
+    fun getFarmersDataById(id: Int): FarmersData
 
     @Query("DELETE FROM farmers_table")
     suspend fun deleteAll()

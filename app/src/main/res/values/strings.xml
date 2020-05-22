@@ -15,4 +15,5 @@
     <string name="farmers_image">Farmers Image</string>
     <string name="farmers_onboard_image">Farmers Onboard Image</string>
     <string name="farmers_name">Farmers Name</string>
+    <string name="farm_name">Farm Name</string>
 </resources>

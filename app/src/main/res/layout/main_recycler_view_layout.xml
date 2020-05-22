@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_card_rtV"
     android:layout_margin="20dp"
     app:cardCornerRadius="10dp"
     android:orientation="vertical">
@@ -16,7 +17,7 @@
     <ImageView
         android:id="@+id/item_farmers_img"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:scaleType="centerCrop"
         android:contentDescription="@string/farmers_image"
         tools:src="@drawable/ic_add"/>
@@ -25,7 +26,8 @@
         android:id="@+id/item_farm_name_textV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Farm Name"
+        android:padding="10dp"
+        android:text="@string/farm_name"
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"/>
