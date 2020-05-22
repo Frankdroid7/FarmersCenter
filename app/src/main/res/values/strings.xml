@@ -13,4 +13,6 @@
     <string name="farmer_s_info">Farmer\'s Info</string>
     <string name="add_farmers_data">Add Farmers Data</string>
     <string name="farmers_image">Farmers Image</string>
+    <string name="farmers_onboard_image">Farmers Onboard Image</string>
+    <string name="farmers_name">Farmers Name</string>
 </resources>

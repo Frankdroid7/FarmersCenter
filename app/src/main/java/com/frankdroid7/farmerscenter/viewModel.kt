@@ -10,7 +10,7 @@ import com.frankdroid7.farmerscenter.database.FarmersRoomDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WordViewModel(application: Application) : AndroidViewModel(application) {
+class FarmersViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: FarmersRepository
 

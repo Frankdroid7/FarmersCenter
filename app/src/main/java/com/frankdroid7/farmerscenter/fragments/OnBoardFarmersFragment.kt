@@ -1,41 +1,35 @@
 package com.frankdroid7.farmerscenter.fragments
 
 import android.app.Activity.RESULT_OK
-import android.content.Context
-import android.content.ContextWrapper
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.frankdroid7.farmerscenter.R
+import com.frankdroid7.farmerscenter.adapter.convertToString
+import kotlinx.android.synthetic.main.fragment_on_board_farmers.*
 import kotlinx.android.synthetic.main.fragment_on_board_farmers.view.*
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
+import kotlinx.android.synthetic.main.fragment_on_board_farmers.view.farmers_onboard_img
 
 
 class OnBoardFarmersFragment : Fragment() {
 
     val REQUEST_IMAGE_CAPTURE = 1
-
-    private lateinit var imageView: ImageView
+    private lateinit var farmersImageBitmap: Bitmap
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_on_board_farmers, container, false)
     }
@@ -44,8 +38,24 @@ class OnBoardFarmersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.apply {
 
-            imageView = farmers_photo_img
-            farmers_photo_img.setOnClickListener {
+            onboard_farmers_button.setOnClickListener {
+                val replyBundle = bundleOf()
+                if (TextUtils.isEmpty(farmers_onboard_name.text.toString())) {
+                    Toast.makeText(context, "All fields must be filled", Toast.LENGTH_LONG).show()
+                } else {
+
+                    replyBundle.putString(FARMERS_NAME, farmers_onboard_name.text.toString())
+                    replyBundle.putString(FARMERS_AGE, farmers_onboard_age.text.toString())
+                    replyBundle.putString(FARMERS_IMG, farmersImageBitmap.convertToString())
+                    replyBundle.putString(FARM_NAME, farm_onboard_name.text.toString())
+                    replyBundle.putString(FARM_LOCATION, farm_onboard_location.text.toString())
+
+                    findNavController().navigate(R.id.homeScreenFragment, replyBundle)
+
+                }
+            }
+
+            farmers_onboard_img.setOnClickListener {
                 captureFarmersPhotograph()
             }
         }
@@ -62,20 +72,19 @@ class OnBoardFarmersFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            val imageBitmap = data!!.extras!!.get("data") as Bitmap
-            imageView.setImageBitmap(imageBitmap)
+             farmersImageBitmap = data!!.extras!!.get("data") as Bitmap
+            farmers_onboard_img.setImageBitmap(farmersImageBitmap)
 
         }
 
     }
 
-    private fun Bitmap.convertToString(): String{
-        val baos =  ByteArrayOutputStream()
-        this.compress(Bitmap.CompressFormat.PNG,100, baos)
-        val byteArray= baos.toByteArray()
-        val bitMapString = Base64.encodeToString(byteArray, Base64.DEFAULT)
-        return  bitMapString
-
-    }
-
+companion object{
+    const val FARMERS_NAME = "com.frankdroid7.farmerscenter.FARMERS_NAME"
+    const val FARMERS_AGE = "com.frankdroid7.farmerscenter.FARMERS_AGE"
+    const val FARMERS_IMG = "com.frankdroid7.farmerscenter.FARMERS_IMG"
+    const val FARM_NAME = "com.frankdroid7.farmerscenter.FARM_NAME"
+    const val FARM_LOCATION = "com.frankdroid7.farmerscenter.FARM_LOCATION"
+    const val FARM_COORDINATES = "com.frankdroid7.farmerscenter.FARM_COORDINATES"
+}
 }

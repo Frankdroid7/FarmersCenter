@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.frankdroid7.farmerscenter.R
 import com.frankdroid7.farmerscenter.database.FarmersData
+import java.io.ByteArrayOutputStream
 
 class FarmersAdapter internal constructor(
     context: Context
@@ -54,5 +55,14 @@ private fun String.convertToBitMap(): Bitmap? {
     } catch (e: Exception) {
         null
     }
+
+}
+
+fun Bitmap.convertToString(): String {
+    val baos = ByteArrayOutputStream()
+    this.compress(Bitmap.CompressFormat.PNG, 100, baos)
+    val byteArray = baos.toByteArray()
+    val bitMapString = Base64.encodeToString(byteArray, Base64.DEFAULT)
+    return bitMapString
 
 }
