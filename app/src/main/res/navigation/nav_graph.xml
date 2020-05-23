@@ -40,10 +40,19 @@
         android:id="@+id/onBoardFarmersFragment"
         android:name="com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment"
         android:label="fragment_on_board_farmers"
-        tools:layout="@layout/fragment_on_board_farmers" />
+        tools:layout="@layout/fragment_on_board_farmers" >
+        <action
+            android:id="@+id/action_onBoardFarmersFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailsScreenFragment"
         android:name="com.frankdroid7.farmerscenter.DetailsScreenFragment"
         android:label="fragment_details_screen"
         tools:layout="@layout/fragment_details_screen" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.frankdroid7.farmerscenter.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
 </navigation>

@@ -1,27 +1,31 @@
 package com.frankdroid7.farmerscenter.fragments
 
+//import com.google.android.gms.location.places.GeoDataClient
+//import com.google.android.gms.location.places.Places
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.frankdroid7.farmerscenter.R
+//import com.frankdroid7.farmerscenter.adapter.PlaceAutocompleteAdapter
 import com.frankdroid7.farmerscenter.adapter.convertToString
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
 import kotlinx.android.synthetic.main.fragment_on_board_farmers.*
 import kotlinx.android.synthetic.main.fragment_on_board_farmers.view.*
-import kotlinx.android.synthetic.main.fragment_on_board_farmers.view.farmers_onboard_img
 
 
-class OnBoardFarmersFragment : Fragment() {
+class OnBoardFarmersFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener {
 
     val REQUEST_IMAGE_CAPTURE = 1
     private lateinit var farmersImageBitmap: Bitmap
@@ -30,8 +34,8 @@ class OnBoardFarmersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_on_board_farmers, container, false)
+
+        return LayoutInflater.from(context).inflate(R.layout.fragment_on_board_farmers, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,6 +61,10 @@ class OnBoardFarmersFragment : Fragment() {
 
             farmers_onboard_img.setOnClickListener {
                 captureFarmersPhotograph()
+            }
+
+            farm_onboard_coordinates.setOnClickListener {
+                findNavController().navigate(R.id.mapsFragment)
             }
         }
     }
@@ -87,4 +95,8 @@ companion object{
     const val FARM_LOCATION = "com.frankdroid7.farmerscenter.FARM_LOCATION"
     const val FARM_COORDINATES = "com.frankdroid7.farmerscenter.FARM_COORDINATES"
 }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
+
+    }
 }

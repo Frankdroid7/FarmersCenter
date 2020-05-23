@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,17 +70,17 @@
             android:hint="Farm Name"/>
 
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/farm_onboard_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Farm Location"/>
 
-        <EditText
+        <Button
             android:id="@+id/farm_onboard_coordinates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Farm Coordinates"/>
+            android:text="Set Farm Coordinates"/>
 
 
         <Button
