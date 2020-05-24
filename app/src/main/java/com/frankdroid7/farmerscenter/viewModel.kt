@@ -32,4 +32,11 @@ class FarmersViewModel(application: Application) : AndroidViewModel(application)
             repository.deleteFarmersDataById(id)
         }
     }
+
+    fun deleteAllRecords(){
+        viewModelScope.launch (Dispatchers.IO){
+            repository.deleteAllRecords()
+
+        }
+    }
 }

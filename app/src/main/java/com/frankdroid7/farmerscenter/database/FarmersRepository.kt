@@ -16,4 +16,7 @@ class FarmersRepository(private val farmersDao: FarmersDao) {
     suspend fun deleteFarmersDataById(id: Int){
         farmersDao.deleteFarmersDataById(id)
     }
+    suspend fun deleteAllRecords(){
+        farmersDao.deleteAll()
+    }
 }

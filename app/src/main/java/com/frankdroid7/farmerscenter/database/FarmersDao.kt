@@ -22,5 +22,5 @@ interface FarmersDao {
     fun deleteFarmersDataById(id: Int)
 
     @Query("DELETE FROM farmers_table")
-    suspend fun deleteAll()
+     suspend fun deleteAll()
 }

@@ -1,13 +1,14 @@
 package com.frankdroid7.farmerscenter.fragments
 
-import android.animation.Animator
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -34,10 +35,8 @@ import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARM_LON3
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARM_LON4
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARM_NAME
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_home_screen.*
 import kotlinx.android.synthetic.main.fragment_home_screen.view.*
-import kotlinx.android.synthetic.main.fragment_home_screen.view.main_recyclerView
 
 
 class HomeScreenFragment : Fragment() {
@@ -79,8 +78,8 @@ class HomeScreenFragment : Fragment() {
             farmersViewModel.insert(farmersData)
         }
 
-         farmersAdapter = FarmersAdapter(requireContext())
-        farmersViewModel.allFarmersData.observe(viewLifecycleOwner, Observer{ farmersData ->
+        farmersAdapter = FarmersAdapter(requireContext())
+        farmersViewModel.allFarmersData.observe(viewLifecycleOwner, Observer { farmersData ->
 
             farmersData?.let {
 
@@ -92,6 +91,17 @@ class HomeScreenFragment : Fragment() {
         })
 
         view.home_screen_toolbar.inflateMenu(R.menu.home_menu)
+        view.home_screen_toolbar.setOnMenuItemClickListener { item: MenuItem? ->
+             when(item?.itemId){
+                R.id.about_us_menu -> showToast(context, "About Us")
+                R.id.contact_us_menu -> showToast(context, "Contact Us")
+                R.id.delete_all_records_menu -> {
+                    farmersViewModel.deleteAllRecords()
+                    showToast(context, "All records Deleted")
+                }
+            }
+            return@setOnMenuItemClickListener true
+        }
         return view
     }
 
@@ -101,7 +111,7 @@ class HomeScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.apply {
-            farmersAdapter.onClickListener = {farmersData ->
+            farmersAdapter.onClickListener = { farmersData ->
 
                 val bundle = bundleOf()
                 bundle.apply {
@@ -125,14 +135,17 @@ class HomeScreenFragment : Fragment() {
                 findNavController().navigate(R.id.detailsScreenFragment, bundle)
 
             }
-            farmersAdapter.popUpListener = {id, view ->
+            farmersAdapter.popUpListener = { id, view ->
 
                 val popup = PopupMenu(context, view)
                 popup.inflate(R.menu.popup_menu)
 
                 popup.setOnMenuItemClickListener { menuItem ->
-                    when(menuItem.itemId){
-                        R.id.delete_record_menu -> farmersViewModel.deleteFarmersDataById(id)
+                    when (menuItem.itemId) {
+                        R.id.delete_record_menu -> {
+                            farmersViewModel.deleteFarmersDataById(id)
+                            showToast(context, "Deleted")
+                        }
                     }
                     return@setOnMenuItemClickListener true
                 }
@@ -143,7 +156,8 @@ class HomeScreenFragment : Fragment() {
 
                 findNavController().navigate(
                     HomeScreenFragmentDirections
-                        .actionHomeScreenFragmentToOnBoardFarmersFragment())
+                        .actionHomeScreenFragmentToOnBoardFarmersFragment()
+                )
             }
 
             search_farm_editT.addTextChangedListener(object : TextWatcher {
@@ -160,7 +174,7 @@ class HomeScreenFragment : Fragment() {
                             newList.add(eachFarmersData)
                         }
                     }
-                    farmersAdapter?.updateList(newList)
+                    farmersAdapter.updateList(newList)
                 }
 
             })
@@ -169,6 +183,7 @@ class HomeScreenFragment : Fragment() {
 
 
 }
-fun showToast(ctx: Context?, msg: String){
+
+fun showToast(ctx: Context?, msg: String) {
     Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show()
 }
