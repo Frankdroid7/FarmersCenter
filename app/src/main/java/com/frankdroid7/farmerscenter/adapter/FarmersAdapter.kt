@@ -21,6 +21,8 @@ class FarmersAdapter internal constructor(
     context: Context
 ) : RecyclerView.Adapter<FarmersAdapter.FarmersViewHolder>() {
 
+    private lateinit var filteredFarmersList: ArrayList<FarmersData>
+
     var onClickListener = {farmersData: FarmersData ->}
     var popUpListener = {id: Int, view: View -> }
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -55,6 +57,13 @@ class FarmersAdapter internal constructor(
         farmersData.forEach { eachFarmersData ->
             Log.e("F_farmersData", eachFarmersData.farm_name)
         }
+        notifyDataSetChanged()
+    }
+
+    fun updateList(newListOfFarmersData: ArrayList<FarmersData>) {
+        filteredFarmersList = arrayListOf()
+        filteredFarmersList.addAll(newListOfFarmersData)
+        farmersData = filteredFarmersList
         notifyDataSetChanged()
     }
 

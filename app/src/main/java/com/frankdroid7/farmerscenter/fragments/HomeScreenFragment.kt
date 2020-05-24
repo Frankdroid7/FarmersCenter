@@ -4,6 +4,8 @@ import android.animation.Animator
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.widget.PopupMenu
@@ -40,8 +42,7 @@ import kotlinx.android.synthetic.main.fragment_home_screen.view.main_recyclerVie
 
 class HomeScreenFragment : Fragment() {
 
-    private lateinit var myMenu: Menu
-
+    private lateinit var listOfFarmersData: List<FarmersData>
     private lateinit var farmersAdapter: FarmersAdapter
     private lateinit var farmersViewModel: FarmersViewModel
 
@@ -83,6 +84,7 @@ class HomeScreenFragment : Fragment() {
 
             farmersData?.let {
 
+                listOfFarmersData = it
                 farmersAdapter.setFarmersData(it)
                 main_recyclerView.adapter = farmersAdapter
                 main_recyclerView.layoutManager = GridLayoutManager(context, 2)
@@ -141,6 +143,25 @@ class HomeScreenFragment : Fragment() {
                     HomeScreenFragmentDirections
                         .actionHomeScreenFragmentToOnBoardFarmersFragment())
             }
+
+            search_farm_editT.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(p0: Editable?) {}
+
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun onTextChanged(newText: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    val userInput = newText!!.toString().toLowerCase()
+                    val newList: ArrayList<FarmersData> = arrayListOf()
+
+                    for (eachFarmersData in listOfFarmersData) {
+                        if (eachFarmersData.farm_name.toLowerCase().contains(userInput)) {
+                            newList.add(eachFarmersData)
+                        }
+                    }
+                    farmersAdapter?.updateList(newList)
+                }
+
+            })
         }
     }
 

@@ -24,7 +24,7 @@ class SplashScreenFragment : Fragment() {
 
 
         Handler().postDelayed({
-            view.findNavController().navigate(R.id.loginFragment)
+            view.findNavController().navigate(R.id.homeScreenFragment)
         }, 3000)
     }
 
