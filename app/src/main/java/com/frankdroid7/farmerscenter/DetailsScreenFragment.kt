@@ -35,18 +35,6 @@ class DetailsScreenFragment : Fragment() {
     private var latlng3: LatLng? = null
     private var latlng4: LatLng? = null
 
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-//        requireActivity().onBackPressedDispatcher
-//            .addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
-//                override fun handleOnBackPressed() {
-//                    //Handle back event from any fragment
-//                    findNavController().navigateUp()
-//                }
-//            })
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -84,6 +72,7 @@ class DetailsScreenFragment : Fragment() {
                 putDouble("mLon3", latlng3!!.longitude)
                 putDouble("mLat4", latlng4!!.latitude)
                 putDouble("mLon4", latlng4!!.longitude)
+                putBoolean("fromDetailsScreen", true)
 
 
             }

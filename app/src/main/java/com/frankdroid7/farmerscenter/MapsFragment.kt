@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.navigateUp
+import com.frankdroid7.farmerscenter.fragments.showToast
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polygon
 import com.google.android.gms.maps.model.PolygonOptions
+import com.phelat.navigationresult.navigateUp
 import kotlinx.android.synthetic.main.fragment_maps.*
 import kotlinx.android.synthetic.main.fragment_maps.save_coordinate_btn
 import kotlinx.android.synthetic.main.fragment_maps.set_polygon_btn
@@ -41,6 +43,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     var count = 0
     private var bundle = Bundle()
     private lateinit var setPolygonBtn: Button
+    private lateinit var continueBtn: Button
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -60,18 +63,20 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         view.apply {
             save_coordinate_btn.setOnClickListener {
-                if (count == 4){
-                    findNavController().navigate(R.id.onBoardFarmersFragment, bundle)
+                if (count == 4) {
+                    Log.e("BUNDLE", bundle.toString())
+                    navigateUp(100, bundle)
+                } else {
+                    showToast(context, "Pick 4 points before you continue.")
                 }
             }
-
             setPolygonBtn = set_polygon_btn
+            continueBtn = save_coordinate_btn
 
         }
     }
@@ -84,19 +89,47 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             when (count) {
                 1 -> {
                     latlng1 = LatLng(latLng.latitude, latLng.longitude)
-                    map.addMarker(MarkerOptions().position(LatLng(latLng.latitude, latLng.longitude)))
+                    map.addMarker(
+                        MarkerOptions().position(
+                            LatLng(
+                                latLng.latitude,
+                                latLng.longitude
+                            )
+                        )
+                    )
                 }
                 2 -> {
                     latlng2 = LatLng(latLng.latitude, latLng.longitude)
-                    map.addMarker(MarkerOptions().position(LatLng(latLng.latitude, latLng.longitude)))
+                    map.addMarker(
+                        MarkerOptions().position(
+                            LatLng(
+                                latLng.latitude,
+                                latLng.longitude
+                            )
+                        )
+                    )
                 }
                 3 -> {
                     latlng3 = LatLng(latLng.latitude, latLng.longitude)
-                    map.addMarker(MarkerOptions().position(LatLng(latLng.latitude, latLng.longitude)))
+                    map.addMarker(
+                        MarkerOptions().position(
+                            LatLng(
+                                latLng.latitude,
+                                latLng.longitude
+                            )
+                        )
+                    )
                 }
                 4 -> {
                     latlng4 = LatLng(latLng.latitude, latLng.longitude)
-                    map.addMarker(MarkerOptions().position(LatLng(latLng.latitude, latLng.longitude)))
+                    map.addMarker(
+                        MarkerOptions().position(
+                            LatLng(
+                                latLng.latitude,
+                                latLng.longitude
+                            )
+                        )
+                    )
                     bundle.apply {
                         putDouble("lat1", latlng1!!.latitude)
                         putDouble("lon1", latlng1!!.longitude)
@@ -111,7 +144,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                         putDouble("lon4", latlng4!!.longitude)
                     }
                 }
-                else -> Toast.makeText(context, "You can only pick 4 coordinates", Toast.LENGTH_LONG)
+                else -> Toast.makeText(
+                    context,
+                    "You can only pick 4 coordinates",
+                    Toast.LENGTH_LONG
+                )
                     .show()
             }
         }
@@ -129,12 +166,20 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                     )
             )
 
+            if (it.getBoolean("fromDetailsScreen")) {
+                setPolygonBtn.visibility = View.GONE
+                continueBtn.visibility = View.GONE
+            }else{
+                setPolygonBtn.visibility = View.VISIBLE
+                continueBtn.visibility = View.VISIBLE
+            }
             polygon1.tag = "alpha"
             polygon1.fillColor = Color.RED
         }
+
         setPolygonBtn.setOnClickListener {
             if (count < 4) {
-                Toast.makeText(context, "Pick 4 points", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Pick 4 points on the map", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 

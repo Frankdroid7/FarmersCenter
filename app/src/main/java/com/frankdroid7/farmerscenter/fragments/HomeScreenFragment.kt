@@ -121,6 +121,7 @@ class HomeScreenFragment : Fragment() {
 
 
                 }
+
                 findNavController().navigate(R.id.detailsScreenFragment, bundle)
 
             }

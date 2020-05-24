@@ -11,8 +11,12 @@
         android:id="@+id/set_polygon_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/PPR_BLUE_GREY800"
+        android:foreground="@drawable/white_ripple_effect"
+        android:layout_margin="5dp"
         android:layout_alignParentTop="true"
-        android:text="Set Polygon"/>
+        android:text="@string/set_polygon"
+        android:textColor="@color/PPR_FULL_WHITE"/>
 
 
     <com.google.android.gms.maps.MapView
@@ -28,8 +32,13 @@
         android:id="@+id/save_coordinate_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/PPR_GREEN500"
+        android:foreground="@drawable/white_ripple_effect"
+        android:elevation="20dp"
         android:layout_alignParentBottom="true"
-        android:text="Continue"/>
+        android:text="Continue"
+        android:textColor="@color/PPR_FULL_WHITE"/>
 
 
 

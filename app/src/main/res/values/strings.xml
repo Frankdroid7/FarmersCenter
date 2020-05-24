@@ -26,4 +26,5 @@
     <string name="take_farmers_picture">Take Farmers Picture</string>
     <string name="pick_farm_coordinates">Pick Farm Coordinates</string>
     <string name="save_data">SAVE DATA</string>
+    <string name="set_polygon">Set Polygon for farm area</string>
 </resources>

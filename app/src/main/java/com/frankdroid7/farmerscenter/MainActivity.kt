@@ -10,8 +10,10 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.phelat.navigationresult.FragmentResultActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : FragmentResultActivity() {
+    override fun getNavHostFragmentId() =  R.id.fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

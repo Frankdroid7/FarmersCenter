@@ -13,35 +13,38 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AutoCompleteTextView
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.contentValuesOf
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.frankdroid7.farmerscenter.R
-//import com.frankdroid7.farmerscenter.adapter.PlaceAutocompleteAdapter
 import com.frankdroid7.farmerscenter.adapter.convertToString
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
+import com.phelat.navigationresult.BundleFragment
 import kotlinx.android.synthetic.main.fragment_on_board_farmers.*
 import kotlinx.android.synthetic.main.fragment_on_board_farmers.view.*
 
 
-class OnBoardFarmersFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener {
+class OnBoardFarmersFragment : BundleFragment(), GoogleApiClient.OnConnectionFailedListener {
 
+    private lateinit var replyBundle: Bundle
     val REQUEST_IMAGE_CAPTURE = 1
-    private lateinit var farmersImageBitmap: Bitmap
+    private var farmersImageBitmap: Bitmap? = null
+    private var coordinatesPicked: Boolean = false
+    private var isCenterCrop: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        replyBundle = bundleOf()
 
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
@@ -63,46 +66,59 @@ class OnBoardFarmersFragment : Fragment(), GoogleApiClient.OnConnectionFailedLis
         super.onViewCreated(view, savedInstanceState)
         view.apply {
 
+            if (isCenterCrop) {
+                farmers_onboard_img.scaleType = ImageView.ScaleType.CENTER_CROP
+            }
+            farmersImageBitmap?.let {
+                farmers_onboard_img.setImageBitmap(it)
+            }
             onboard_farmers_button.setOnClickListener {
-                val replyBundle = bundleOf()
-                if (TextUtils.isEmpty(farmers_onboard_name.text.toString())) {
-                    Toast.makeText(context, "All fields must be filled", Toast.LENGTH_LONG).show()
-                } else {
 
-                    arguments?.let {
-
-                        replyBundle.putString(FARMERS_NAME, farmers_onboard_name.text.toString())
-                        replyBundle.putString(FARMERS_AGE, farmers_onboard_age.text.toString())
-                        replyBundle.putString(FARMERS_IMG, farmersImageBitmap.convertToString())
-                        replyBundle.putString(FARM_NAME, farm_onboard_name.text.toString())
-                        replyBundle.putString(FARM_LOCATION, farm_onboard_location.text.toString())
-                        replyBundle.putDouble(FARM_LAT1, it.getDouble("lat1"))
-                        replyBundle.putDouble(FARM_LON1, it.getDouble("lon1"))
-                        replyBundle.putDouble(FARM_LAT2, it.getDouble("lat2"))
-                        replyBundle.putDouble(FARM_LON2, it.getDouble("lon2"))
-                        replyBundle.putDouble(FARM_LAT3, it.getDouble("lat3"))
-                        replyBundle.putDouble(FARM_LON3, it.getDouble("lon3"))
-                        replyBundle.putDouble(FARM_LAT4, it.getDouble("lat4"))
-                        replyBundle.putDouble(FARM_LON4, it.getDouble("lon4"))
-                    }
-
-                    findNavController().navigate(R.id.homeScreenFragment, replyBundle)
-
+                if (farmers_onboard_name.text.toString().isEmpty()) {
+                    farmers_onboard_name.error = "Must not be empty"
+                    return@setOnClickListener
                 }
+                if (farmers_onboard_age.text.toString().isEmpty()) {
+                    farmers_onboard_age.error = "Must not be empty"
+                    return@setOnClickListener
+                }
+                if (farmersImageBitmap == null) {
+                    showToast(context, "Take Farmers Photograph")
+                    return@setOnClickListener
+                }
+                if (farm_onboard_name.text.toString().isEmpty()) {
+                    farm_onboard_name.error = "Must not be empty"
+                    return@setOnClickListener
+                }
+                if (farm_onboard_location.text.toString().isEmpty()) {
+                    farm_onboard_location.error = "Must not be empty"
+                    return@setOnClickListener
+                }
+                if (coordinatesPicked) {
+                    showToast(context, "Pick Coordinates")
+                    return@setOnClickListener
+                }
+
+                arguments?.let {
+                    replyBundle.putString(FARMERS_NAME, farmers_onboard_name.text.toString())
+                    replyBundle.putString(FARMERS_AGE, farmers_onboard_age.text.toString())
+                    replyBundle.putString(FARMERS_IMG, farmersImageBitmap?.convertToString())
+                    replyBundle.putString(FARM_NAME, farm_onboard_name.text.toString())
+                    replyBundle.putString(FARM_LOCATION, farm_onboard_location.text.toString())
+                }
+
+                findNavController().navigate(R.id.homeScreenFragment, replyBundle)
             }
 
-            farmers_onboard_img.setOnClickListener {
-                captureFarmersPhotograph()
-
-            }
+            farmers_onboard_img.setOnClickListener { captureFarmersPhotograph() }
 
             farm_onboard_coordinates.setOnClickListener {
-//
                 if (isNetworkActive()) {
-                    if (isLocationEnabled(requireContext())){
-                        val action = OnBoardFarmersFragmentDirections.actionOnBoardFarmersFragmentToMapsFragment()
-                        findNavController().navigate(action)
-                    }else{
+                    if (isLocationEnabled(requireContext())) {
+                        val action =
+                            OnBoardFarmersFragmentDirections.actionOnBoardFarmersFragmentToMapsFragment()
+                        navigate(action, 100)
+                    } else {
                         showToast(requireContext(), "Please SWITCH ON your location")
                     }
                 } else {
@@ -110,6 +126,23 @@ class OnBoardFarmersFragment : Fragment(), GoogleApiClient.OnConnectionFailedLis
                 }
             }
         }
+    }
+
+    override fun onFragmentResult(requestCode: Int, bundle: Bundle) {
+        super.onFragmentResult(requestCode, bundle)
+
+
+        replyBundle.putDouble(FARM_LAT1, bundle.getDouble("lat1"))
+        replyBundle.putDouble(FARM_LON1, bundle.getDouble("lon1"))
+        replyBundle.putDouble(FARM_LAT2, bundle.getDouble("lat2"))
+        replyBundle.putDouble(FARM_LON2, bundle.getDouble("lon2"))
+        replyBundle.putDouble(FARM_LAT3, bundle.getDouble("lat3"))
+        replyBundle.putDouble(FARM_LON3, bundle.getDouble("lon3"))
+        replyBundle.putDouble(FARM_LAT4, bundle.getDouble("lat4"))
+        replyBundle.putDouble(FARM_LON4, bundle.getDouble("lon4"))
+
+        coordinatesPicked = true
+
     }
 
     private fun captureFarmersPhotograph() {
@@ -125,6 +158,8 @@ class OnBoardFarmersFragment : Fragment(), GoogleApiClient.OnConnectionFailedLis
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             farmersImageBitmap = data!!.extras!!.get("data") as Bitmap
             farmers_onboard_img.setImageBitmap(farmersImageBitmap)
+            farmers_onboard_img.scaleType = ImageView.ScaleType.CENTER_CROP
+            isCenterCrop = true
 
         }
 
