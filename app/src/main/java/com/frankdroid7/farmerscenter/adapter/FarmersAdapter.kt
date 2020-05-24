@@ -49,6 +49,7 @@ class FarmersAdapter internal constructor(
     }
 
     internal fun setFarmersData(farmersData: List<FarmersData>) {
+
         this.farmersData = farmersData
         notifyDataSetChanged()
     }
