@@ -33,7 +33,7 @@ class FarmersAdapter internal constructor(
         val farmersImg = itemView.findViewById<ImageView>(R.id.item_farmers_img)!!
         val farmName = itemView.findViewById<TextView>(R.id.item_farm_name_textV)!!
         val farmCardRtV = itemView.findViewById<CardView>(R.id.item_card_rtV)!!
-        val popUpBtn = itemView.findViewById<ImageButton>(R.id.item_popup_btn)!!
+        val popUpBtn = itemView.findViewById<ImageView>(R.id.item_popup_btn)!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FarmersViewHolder {

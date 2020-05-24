@@ -21,4 +21,9 @@
     <string name="delete_all_records">Delete All Records</string>
     <string name="delete_record">Delete Record</string>
     <string name="title_activity_maps">Map</string>
+    <string name="farmers_age">Farmers Age</string>
+    <string name="farm_location">Farm Location</string>
+    <string name="take_farmers_picture">Take Farmers Picture</string>
+    <string name="pick_farm_coordinates">Pick Farm Coordinates</string>
+    <string name="save_data">SAVE DATA</string>
 </resources>

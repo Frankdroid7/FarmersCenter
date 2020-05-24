@@ -128,6 +128,7 @@ class HomeScreenFragment : Fragment() {
 
                 val popup = PopupMenu(context, view)
                 popup.inflate(R.menu.popup_menu)
+
                 popup.setOnMenuItemClickListener { menuItem ->
                     when(menuItem.itemId){
                         R.id.delete_record_menu -> farmersViewModel.deleteFarmersDataById(id)

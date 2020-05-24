@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.OnBoardFarmersFragment">
 
 
@@ -12,88 +12,187 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/colorPrimary"
+            app:title="OnBoard Farmers"
+            app:titleTextColor="@color/PPR_FULL_WHITE"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="@string/farmer_s_info"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/form_background"
+            android:padding="10dp"
+            android:textColorHint="@color/PPR_FULL_BLACK"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/farmers_onboard_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/farmers_name"
+                android:inputType="textPersonName"
+                android:textColor="@color/PPR_FULL_BLACK" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/form_background"
+            android:padding="10dp"
+            android:textColorHint="@color/PPR_FULL_BLACK"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/farmers_onboard_age"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/farmers_age"
+                android:inputType="number"
+                android:textColor="@color/PPR_FULL_BLACK" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/take_farmers_picture"
             android:gravity="center"
-            android:layout_margin="10dp"
-            android:text="@string/farmer_s_info"
-            android:textStyle="bold"
-            android:textSize="25sp"/>
-
-        <EditText
-            android:id="@+id/farmers_onboard_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Seybel"
-            android:hint="@string/farmers_name"/>
-
-        <EditText
-            android:id="@+id/farmers_onboard_age"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="24"
-            android:hint="Farmers Age"/>
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_margin="20dp"
+            app:cardBackgroundColor="@color/PPR_BLUE_GREY800"
             app:cardCornerRadius="20dp"
-            app:cardElevation="7dp"
-            app:cardBackgroundColor="@color/PPR_BLUE_GREY800">
+            app:cardElevation="7dp">
 
             <ImageView
                 android:id="@+id/farmers_onboard_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_popup_menu"
+                android:layout_gravity="center"
                 android:contentDescription="@string/farmers_onboard_image"
-                android:scaleType="centerCrop"/>
+                app:srcCompat="@drawable/ic_add_circle" />
 
         </androidx.cardview.widget.CardView>
 
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp">
 
-        <TextView
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="@string/farm_info"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_margin="10dp"
-            android:text="@string/farm_info"
-            android:textStyle="bold"
-            android:textSize="25sp"/>
+            android:layout_margin="20dp"
+            android:background="@drawable/form_background"
+            android:padding="10dp"
+            android:textColorHint="@color/PPR_FULL_BLACK"
+            app:endIconMode="clear_text">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/farm_onboard_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/farm_name"
+                android:inputType="textPersonName"
+                android:textColor="@color/PPR_FULL_BLACK" />
 
-        <EditText
-            android:id="@+id/farm_onboard_name"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SeybelFarms"
-            android:hint="Farm Name"/>
+            android:layout_margin="20dp"
+            android:background="@drawable/form_background"
+            android:padding="10dp"
+            android:textColorHint="@color/PPR_FULL_BLACK"
+            app:endIconMode="clear_text">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/farm_onboard_location"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/farm_location"
+                android:inputType="textPostalAddress"
+                android:textColor="@color/PPR_FULL_BLACK" />
 
-        <AutoCompleteTextView
-            android:id="@+id/farm_onboard_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lagos, Nigeria"
-            android:hint="Farm Location"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/farm_onboard_coordinates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Set Farm Coordinates"/>
+            android:background="@color/PPR_BLUE_GREY800"
+            android:foreground="@drawable/white_ripple_effect"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:text="@string/pick_farm_coordinates"
+            android:textColor="@color/PPR_FULL_WHITE"/>
 
 
         <Button
             android:id="@+id/onboard_farmers_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:text="Save Data"/>
+            android:background="@color/PPR_GREEN500"
+            android:foreground="@drawable/white_ripple_effect"
+            android:elevation="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/save_data"
+            android:textColor="@color/PPR_FULL_WHITE"/>
 
     </LinearLayout>
 
