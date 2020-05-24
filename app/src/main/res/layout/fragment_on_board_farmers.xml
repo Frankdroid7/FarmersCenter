@@ -26,12 +26,14 @@
             android:id="@+id/farmers_onboard_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Seybel"
             android:hint="@string/farmers_name"/>
 
         <EditText
             android:id="@+id/farmers_onboard_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="24"
             android:hint="Farmers Age"/>
 
         <androidx.cardview.widget.CardView
@@ -46,6 +48,7 @@
                 android:id="@+id/farmers_onboard_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:src="@drawable/ic_popup_menu"
                 android:contentDescription="@string/farmers_onboard_image"
                 android:scaleType="centerCrop"/>
 
@@ -67,6 +70,7 @@
             android:id="@+id/farm_onboard_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="SeybelFarms"
             android:hint="Farm Name"/>
 
 
@@ -74,6 +78,7 @@
             android:id="@+id/farm_onboard_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Lagos, Nigeria"
             android:hint="Farm Location"/>
 
         <Button

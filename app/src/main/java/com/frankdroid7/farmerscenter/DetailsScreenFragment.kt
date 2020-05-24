@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.frankdroid7.farmerscenter.adapter.convertToBitMap
 import kotlinx.android.synthetic.main.fragment_details_screen.*
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARMERS_AGE
@@ -33,6 +35,18 @@ class DetailsScreenFragment : Fragment() {
     private var latlng3: LatLng? = null
     private var latlng4: LatLng? = null
 
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+//        requireActivity().onBackPressedDispatcher
+//            .addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
+//                override fun handleOnBackPressed() {
+//                    //Handle back event from any fragment
+//                    findNavController().navigateUp()
+//                }
+//            })
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +57,7 @@ class DetailsScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         arguments?.let{
             details_farmers_name.text = it.getString(FARMERS_NAME)
@@ -70,7 +85,6 @@ class DetailsScreenFragment : Fragment() {
                 putDouble("mLat4", latlng4!!.latitude)
                 putDouble("mLon4", latlng4!!.longitude)
 
-                Log.e("D_LAT4",  this.getDouble(FARM_LAT4).toString())
 
             }
             show_farm_coordinate_btn.setOnClickListener {

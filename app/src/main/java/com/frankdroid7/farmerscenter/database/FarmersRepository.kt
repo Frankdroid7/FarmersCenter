@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 
 class FarmersRepository(private val farmersDao: FarmersDao) {
 
-    val allFarmersData: LiveData<List<FarmersData>> = farmersDao.getAllFarmersData()
+    val allFarmersData: LiveData<MutableList<FarmersData>> = farmersDao.getAllFarmersData()
 
     suspend fun insert(farmersData: FarmersData) {
         farmersDao.insert(farmersData)

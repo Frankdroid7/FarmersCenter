@@ -14,7 +14,8 @@ class FarmersViewModel(application: Application) : AndroidViewModel(application)
 
     private val repository: FarmersRepository
 
-    val allFarmersData: LiveData<List<FarmersData>>
+    var allFarmersData: LiveData<MutableList<FarmersData>>
+
 
     init {
         val wordsDao = FarmersRoomDatabase.getDatabase(application).farmersDao()

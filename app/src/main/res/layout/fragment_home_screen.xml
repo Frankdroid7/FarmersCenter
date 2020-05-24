@@ -21,11 +21,37 @@
         app:title="FarmersCenter"
         app:titleTextColor="@color/PPR_FULL_WHITE" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/search_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_below="@id/home_screen_toolbar"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="3dp">
+
+        <EditText
+            android:id="@+id/search_farm_editT"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:background="@null"
+            android:inputType="textCapWords"
+            android:textColor="@color/PPR_BLUE_GREY800"
+            android:textColorHint="@color/PPR_GREY800"
+            android:hint="Search for Pot"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_search"/>
+
+    </androidx.cardview.widget.CardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/home_screen_toolbar"/>
+        android:layout_below="@id/search_cardView"
+        tools:listitem="@layout/main_recycler_view_layout"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/home_fab"

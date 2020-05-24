@@ -10,7 +10,7 @@ import androidx.room.Query
 interface FarmersDao {
 
     @Query("SELECT * from farmers_table")
-    fun getAllFarmersData(): LiveData<List<FarmersData>>
+    fun getAllFarmersData(): LiveData<MutableList<FarmersData>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(farmersData: FarmersData)

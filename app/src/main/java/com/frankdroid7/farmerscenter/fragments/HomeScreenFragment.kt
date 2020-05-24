@@ -1,13 +1,14 @@
 package com.frankdroid7.farmerscenter.fragments
 
+import android.animation.Animator
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -31,15 +32,18 @@ import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARM_LON3
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARM_LON4
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARM_NAME
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.fragment_home_screen.*
 import kotlinx.android.synthetic.main.fragment_home_screen.view.*
+import kotlinx.android.synthetic.main.fragment_home_screen.view.main_recyclerView
 
 
 class HomeScreenFragment : Fragment() {
 
-    private val homeScreenFragmentRequestCode = 1
+    private lateinit var myMenu: Menu
+
     private lateinit var farmersAdapter: FarmersAdapter
     private lateinit var farmersViewModel: FarmersViewModel
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +56,6 @@ class HomeScreenFragment : Fragment() {
             inflater.inflate(R.layout.fragment_home_screen, container, false)
 
         farmersViewModel = ViewModelProvider(this).get(FarmersViewModel::class.java)
-
 
         arguments?.let {
             val farmersData = FarmersData(
@@ -76,10 +79,13 @@ class HomeScreenFragment : Fragment() {
         }
 
          farmersAdapter = FarmersAdapter(requireContext())
-        farmersViewModel.allFarmersData.observe(viewLifecycleOwner, Observer{farmersData ->
+        farmersViewModel.allFarmersData.observe(viewLifecycleOwner, Observer{ farmersData ->
 
             farmersData?.let {
+
                 farmersAdapter.setFarmersData(it)
+                main_recyclerView.adapter = farmersAdapter
+                main_recyclerView.layoutManager = GridLayoutManager(context, 2)
             }
         })
 
@@ -88,6 +94,7 @@ class HomeScreenFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -127,8 +134,7 @@ class HomeScreenFragment : Fragment() {
                 }
                 popup.show()
             }
-            main_recyclerView.adapter = farmersAdapter
-            main_recyclerView.layoutManager = GridLayoutManager(context, 2)
+
             home_fab.setOnClickListener {
 
                 findNavController().navigate(
@@ -137,6 +143,7 @@ class HomeScreenFragment : Fragment() {
             }
         }
     }
+
 
 }
 fun showToast(ctx: Context?, msg: String){

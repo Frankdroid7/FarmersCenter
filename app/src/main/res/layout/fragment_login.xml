@@ -10,7 +10,7 @@
     android:orientation="vertical"
     tools:context=".fragments.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -61,8 +61,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/form_btn_background"
-        android:elevation="10dp"
+        android:elevation="15dp"
         android:text="@string/login"
+        android:textSize="20sp"
         android:textColor="@color/PPR_FULL_WHITE"
         android:layout_marginLeft="30dp"
         android:layout_marginStart="30dp"

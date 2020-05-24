@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,7 +51,10 @@ class FarmersAdapter internal constructor(
 
     internal fun setFarmersData(farmersData: List<FarmersData>) {
 
-        this.farmersData = farmersData
+        this.farmersData = farmersData.distinct()
+        farmersData.forEach { eachFarmersData ->
+            Log.e("F_farmersData", eachFarmersData.farm_name)
+        }
         notifyDataSetChanged()
     }
 

@@ -13,7 +13,8 @@
         tools:layout="@layout/fragment_splash_screen" >
         <action
             android:id="@+id/action_splashScreenFragment2_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -22,7 +23,8 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_homeScreenFragment"
-            app:destination="@id/homeScreenFragment" />
+            app:destination="@id/homeScreenFragment"
+            app:enterAnim="@anim/slide_in_right"/>
     </fragment>
     <fragment
         android:id="@+id/homeScreenFragment"
@@ -31,10 +33,12 @@
         tools:layout="@layout/fragment_home_screen" >
         <action
             android:id="@+id/action_homeScreenFragment_to_onBoardFarmersFragment"
-            app:destination="@id/onBoardFarmersFragment" />
+            app:destination="@id/onBoardFarmersFragment"
+            app:enterAnim="@anim/slide_in_right"/>
         <action
             android:id="@+id/action_homeScreenFragment_to_detailsScreenFragment"
-            app:destination="@id/detailsScreenFragment" />
+            app:destination="@id/detailsScreenFragment"
+            app:enterAnim="@anim/slide_in_right"/>
     </fragment>
     <fragment
         android:id="@+id/onBoardFarmersFragment"
@@ -43,7 +47,8 @@
         tools:layout="@layout/fragment_on_board_farmers" >
         <action
             android:id="@+id/action_onBoardFarmersFragment_to_mapsFragment"
-            app:destination="@id/mapsFragment" />
+            app:destination="@id/mapsFragment"
+            app:enterAnim="@anim/slide_in_right"/>
     </fragment>
     <fragment
         android:id="@+id/detailsScreenFragment"
