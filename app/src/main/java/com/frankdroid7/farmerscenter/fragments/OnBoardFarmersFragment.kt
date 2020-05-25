@@ -12,8 +12,6 @@ import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +22,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import com.frankdroid7.farmerscenter.R
 import com.frankdroid7.farmerscenter.adapter.convertToString
+import com.frankdroid7.farmerscenter.shouldSaveDataToDb
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.phelat.navigationresult.BundleFragment
@@ -107,6 +106,7 @@ class OnBoardFarmersFragment : BundleFragment(), GoogleApiClient.OnConnectionFai
                     replyBundle.putString(FARM_LOCATION, farm_onboard_location.text.toString())
                 }
 
+                shouldSaveDataToDb = true
                 findNavController().navigate(R.id.homeScreenFragment, replyBundle)
             }
 

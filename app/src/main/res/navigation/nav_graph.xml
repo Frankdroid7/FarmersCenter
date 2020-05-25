@@ -5,7 +5,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashScreenFragment2">
 
-
     <fragment
         android:id="@+id/splashScreenFragment2"
         android:name="com.frankdroid7.farmerscenter.fragments.SplashScreenFragment"
@@ -14,8 +13,12 @@
         <action
             android:id="@+id/action_splashScreenFragment2_to_loginFragment"
             app:destination="@id/loginFragment"
+            app:popUpTo="@+id/splashScreenFragment2"
+            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_right" />
     </fragment>
+
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.frankdroid7.farmerscenter.fragments.LoginFragment"
@@ -26,6 +29,8 @@
             app:destination="@id/homeScreenFragment"
             app:enterAnim="@anim/slide_in_right"/>
     </fragment>
+
+
     <fragment
         android:id="@+id/homeScreenFragment"
         android:name="com.frankdroid7.farmerscenter.fragments.HomeScreenFragment"
@@ -40,6 +45,8 @@
             app:destination="@id/detailsScreenFragment"
             app:enterAnim="@anim/slide_in_right"/>
     </fragment>
+
+
     <fragment
         android:id="@+id/onBoardFarmersFragment"
         android:name="com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment"
@@ -50,14 +57,26 @@
             app:destination="@id/mapsFragment"
             app:enterAnim="@anim/slide_in_right"/>
     </fragment>
+
+
     <fragment
         android:id="@+id/detailsScreenFragment"
         android:name="com.frankdroid7.farmerscenter.DetailsScreenFragment"
         android:label="fragment_details_screen"
-        tools:layout="@layout/fragment_details_screen" />
+        tools:layout="@layout/fragment_details_screen"
+        app:popUpTo="@+id/splashScreenFragment2"
+        app:popUpToInclusive="true">
+
+        <action
+            android:id="@+id/action_detailsScreenFragment_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment" />
+    </fragment>
+
+
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.frankdroid7.farmerscenter.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
+
 </navigation>

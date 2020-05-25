@@ -35,6 +35,7 @@ import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARM_LON3
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARM_LON4
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARM_NAME
+import com.frankdroid7.farmerscenter.shouldSaveDataToDb
 import kotlinx.android.synthetic.main.fragment_home_screen.*
 import kotlinx.android.synthetic.main.fragment_home_screen.view.*
 
@@ -57,7 +58,8 @@ class HomeScreenFragment : Fragment() {
 
         farmersViewModel = ViewModelProvider(this).get(FarmersViewModel::class.java)
 
-        arguments?.let {
+
+        if (shouldSaveDataToDb){
             val farmersData = FarmersData(
                 0,
                 arguments?.getString(FARMERS_NAME)!!,

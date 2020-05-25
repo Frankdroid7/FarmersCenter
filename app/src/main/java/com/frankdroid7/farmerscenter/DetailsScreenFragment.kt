@@ -1,16 +1,14 @@
 package com.frankdroid7.farmerscenter
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.frankdroid7.farmerscenter.adapter.convertToBitMap
-import kotlinx.android.synthetic.main.fragment_details_screen.*
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARMERS_AGE
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARMERS_IMG
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARMERS_NAME
@@ -25,15 +23,34 @@ import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARM_LON4
 import com.frankdroid7.farmerscenter.fragments.OnBoardFarmersFragment.Companion.FARM_NAME
 import com.google.android.gms.maps.model.LatLng
-import kotlinx.android.synthetic.main.fragment_details_screen.show_farm_coordinate_btn
+import kotlinx.android.synthetic.main.fragment_details_screen.*
 import kotlinx.android.synthetic.main.fragment_details_screen.view.*
 
+var shouldSaveDataToDb = false
 class DetailsScreenFragment : Fragment() {
 
     private var latlng1: LatLng? = null
     private var latlng2: LatLng? = null
     private var latlng3: LatLng? = null
     private var latlng4: LatLng? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // This callback will only be called when MyFragment is at least Started.
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    // Handle the back button event
+                    findNavController().navigateUp()
+                 shouldSaveDataToDb = false
+                }
+
+
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,7 +83,9 @@ class DetailsScreenFragment : Fragment() {
 
         view.apply {
 
-            details_arrow_back.setOnClickListener { findNavController().navigateUp() }
+            details_arrow_back.setOnClickListener {
+                shouldSaveDataToDb = false
+                findNavController().navigateUp() }
 
             val mapBundle = Bundle()
             mapBundle.apply {

@@ -27,7 +27,18 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.apply {
+
             login_btn.setOnClickListener {
+
+                if (login_email.text.toString().isEmpty()){
+                    login_email.error = "Must not be empty"
+                    return@setOnClickListener
+                }
+                if (login_pswd.text.toString().isEmpty()){
+                    login_pswd.error = "Must not be empty"
+                    return@setOnClickListener
+
+                }
                 if (login_email.text.toString() == "test@theagromall.com"
                     && login_pswd.text.toString() == "password"){
 
