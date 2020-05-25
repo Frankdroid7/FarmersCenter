@@ -16,15 +16,17 @@
     <string name="add_farmers_data">Add Farmers Data</string>
     <string name="farmers_image">Farmers Image</string>
     <string name="farmers_onboard_image">Farmers Onboard Image</string>
-    <string name="farmers_name">Farmers Name</string>
+    <string name="farmers_name">Farmer\'s Name</string>
     <string name="farm_name">Farm Name</string>
     <string name="delete_all_records">Delete All Records</string>
     <string name="delete_record">Delete Record</string>
     <string name="title_activity_maps">Map</string>
-    <string name="farmers_age">Farmers Age</string>
+    <string name="farmers_age">Farmer\'s Age</string>
     <string name="farm_location">Farm Location</string>
     <string name="take_farmers_picture">Take Farmers Picture</string>
     <string name="pick_farm_coordinates">Pick Farm Coordinates</string>
     <string name="save_data">SAVE DATA</string>
     <string name="set_polygon">Set Polygon for farm area</string>
+    <string name="back_arrow">Back arrow</string>
+    <string name="farmer_s_address">Farmer\'s Address</string>
 </resources>

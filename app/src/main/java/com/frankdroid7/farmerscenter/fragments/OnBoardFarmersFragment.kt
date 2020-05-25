@@ -94,7 +94,7 @@ class OnBoardFarmersFragment : BundleFragment(), GoogleApiClient.OnConnectionFai
                     farm_onboard_location.error = "Must not be empty"
                     return@setOnClickListener
                 }
-                if (coordinatesPicked) {
+                if (!coordinatesPicked) {
                     showToast(context, "Pick Coordinates")
                     return@setOnClickListener
                 }

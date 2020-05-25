@@ -39,6 +39,8 @@ class DetailsScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_details_screen, container, false)
     }
@@ -47,11 +49,12 @@ class DetailsScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+
         arguments?.let{
             details_farmers_name.text = it.getString(FARMERS_NAME)
             details_farmers_age.text = it.getString(FARMERS_AGE)
             details_farmers_img.setImageBitmap(it.getString(FARMERS_IMG)?.convertToBitMap())
-            details_toolbar.title = it.getString(FARM_NAME)
+            details_toolbar_text.text = it.getString(FARM_NAME)
             details_farm_location.text = it.getString(FARM_LOCATION)
             latlng1 = LatLng(it.getDouble(FARM_LAT1), it.getDouble(FARM_LON1))
             latlng2 = LatLng(it.getDouble(FARM_LAT2), it.getDouble(FARM_LON2))
@@ -62,6 +65,9 @@ class DetailsScreenFragment : Fragment() {
         }
 
         view.apply {
+
+            details_arrow_back.setOnClickListener { findNavController().navigateUp() }
+
             val mapBundle = Bundle()
             mapBundle.apply {
                 putDouble("mLat1", latlng1!!.latitude)
