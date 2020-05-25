@@ -17,9 +17,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.frankdroid7.farmerscenter.R
 import com.frankdroid7.farmerscenter.adapter.convertToString
 import com.frankdroid7.farmerscenter.shouldSaveDataToDb
@@ -37,6 +39,23 @@ class OnBoardFarmersFragment : BundleFragment(), GoogleApiClient.OnConnectionFai
     private var farmersImageBitmap: Bitmap? = null
     private var coordinatesPicked: Boolean = false
     private var isCenterCrop: Boolean = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // This callback will only be called when MyFragment is at least Started.
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    // Handle the back button event
+                    findNavController().navigateUp()
+                    shouldSaveDataToDb = false
+                }
+
+
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -107,7 +126,7 @@ class OnBoardFarmersFragment : BundleFragment(), GoogleApiClient.OnConnectionFai
                 }
 
                 shouldSaveDataToDb = true
-                findNavController().navigate(R.id.homeScreenFragment, replyBundle)
+                findNavController().navigate(R.id.action_onBoardFarmersFragment_to_homeScreenFragment, replyBundle)
             }
 
             farmers_onboard_img.setOnClickListener { captureFarmersPhotograph() }

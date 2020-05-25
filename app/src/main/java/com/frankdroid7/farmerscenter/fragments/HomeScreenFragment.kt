@@ -59,7 +59,7 @@ class HomeScreenFragment : Fragment() {
         farmersViewModel = ViewModelProvider(this).get(FarmersViewModel::class.java)
 
 
-        if (shouldSaveDataToDb){
+        if (shouldSaveDataToDb) {
             val farmersData = FarmersData(
                 0,
                 arguments?.getString(FARMERS_NAME)!!,
@@ -83,6 +83,10 @@ class HomeScreenFragment : Fragment() {
         farmersAdapter = FarmersAdapter(requireContext())
         farmersViewModel.allFarmersData.observe(viewLifecycleOwner, Observer { farmersData ->
 
+            if (farmersData.isEmpty()) {
+                main_recyclerView.visibility = View.GONE
+                no_records_linearL.visibility = View.VISIBLE
+            }
             farmersData?.let {
 
                 listOfFarmersData = it
@@ -94,7 +98,7 @@ class HomeScreenFragment : Fragment() {
 
         view.home_screen_toolbar.inflateMenu(R.menu.home_menu)
         view.home_screen_toolbar.setOnMenuItemClickListener { item: MenuItem? ->
-             when(item?.itemId){
+            when (item?.itemId) {
                 R.id.about_us_menu -> showToast(context, "About Us")
                 R.id.contact_us_menu -> showToast(context, "Contact Us")
                 R.id.delete_all_records_menu -> {
@@ -134,7 +138,10 @@ class HomeScreenFragment : Fragment() {
 
                 }
 
-                findNavController().navigate(R.id.detailsScreenFragment, bundle)
+                findNavController().navigate(
+                    R.id.action_homeScreenFragment_to_detailsScreenFragment,
+                    bundle
+                )
 
             }
             farmersAdapter.popUpListener = { id, view ->

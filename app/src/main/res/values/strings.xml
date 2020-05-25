@@ -29,4 +29,5 @@
     <string name="set_polygon">Set Polygon for farm area</string>
     <string name="back_arrow">Back arrow</string>
     <string name="farmer_s_address">Farmer\'s Address</string>
+    <string name="no_records">No records yet, click the button below to start onboarding farmers.</string>
 </resources>

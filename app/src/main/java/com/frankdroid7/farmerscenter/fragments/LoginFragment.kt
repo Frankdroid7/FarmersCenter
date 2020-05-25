@@ -46,7 +46,7 @@ class LoginFragment : Fragment() {
                     login_pb.visibility = View.VISIBLE
 
                     Handler().postDelayed({
-                        findNavController().navigate(R.id.homeScreenFragment)
+                        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeScreenFragment())
                     }, 3000)
                 }else{
                     Snackbar.make(login_llt_root,
